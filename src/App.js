@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import './App.css';
+import PlanetContext from './context/PlanetsContext';
+import Table from './components/Table';
 
 function App() {
+  const { fetchPlanets } = useContext(PlanetContext);
+
+  useEffect(() => {
+    const URL = 'https://swapi.dev/api/planets';
+    fetchPlanets(URL);
+  }, []);
+
   return (
-    <span>Hello, App!</span>
+    <div>
+      <Table />
+    </div>
   );
 }
 
