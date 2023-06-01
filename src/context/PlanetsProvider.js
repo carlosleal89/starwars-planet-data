@@ -4,6 +4,7 @@ import PlanetContext from './PlanetsContext';
 
 export default function PlanetsProvider({ children }) {
   const [planetsList, setPlanetsList] = useState([]);
+  const [filteredPlanetList, setFilteredPlanetList] = useState(planetsList);
   const [isLoading, setIsLoading] = useState(false);
   const [query, setSearchQuery] = useState('');
   const [filterQuery, setFilterQuery] = useState('');
@@ -43,6 +44,8 @@ export default function PlanetsProvider({ children }) {
           isLoading,
           query,
           filterQuery,
+          filteredPlanetList,
+          setFilteredPlanetList,
           filterSelection,
           searchQuery,
           fetchPlanets }

@@ -3,15 +3,14 @@ import PlanetContext from '../context/PlanetsContext';
 import './Table.css';
 
 export default function Table() {
-  const { planetsList, isLoading, query, filterQuery } = useContext(PlanetContext);
+  const { filteredPlanetList, isLoading, query } = useContext(PlanetContext);
   const [keys, setKeys] = useState([]);
-  const op = '>=';
 
   useEffect(() => {
-    if (planetsList.length > 0) {
-      setKeys(Object.keys(planetsList[0]));
+    if (filteredPlanetList.length > 0) {
+      setKeys(Object.keys(filteredPlanetList[0]));
     }
-  }, [planetsList]);
+  }, [filteredPlanetList]);
 
   return (
     <div>
@@ -27,16 +26,15 @@ export default function Table() {
                 ))}
               </tr>
             </thead>
-            {
-              planetsList
-                .filter((el) => el[filterQuery] >= 4500000000	)
-                .filter(({ name }) => {
-                  const value = name.toLowerCase();
-                  return value.includes(query);
-                })
-                .map((planet, index) => (
-                  <tbody key={ index }>
-                    <tr>
+            <tbody>
+              {
+                filteredPlanetList
+                  .filter(({ name }) => {
+                    const value = name.toLowerCase();
+                    return value.includes(query);
+                  })
+                  .map((planet, index) => (
+                    <tr key={ index }>
                       <td>{planet.name}</td>
                       <td>{planet.rotation_period}</td>
                       <td>{planet.orbital_period}</td>
@@ -51,9 +49,9 @@ export default function Table() {
                       <td>{planet.edited}</td>
                       <td>{planet.url}</td>
                     </tr>
-                  </tbody>
-                ))
-            }
+                  ))
+              }
+            </tbody>
           </table>
         </div>
       )}
