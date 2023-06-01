@@ -5,6 +5,7 @@ import PlanetContext from './PlanetsContext';
 export default function PlanetsProvider({ children }) {
   const [planetsList, setPlanetsList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [query, setSearchQuery] = useState('');
 
   const fetchPlanets = async (url) => {
     try {
@@ -25,9 +26,13 @@ export default function PlanetsProvider({ children }) {
     }
   };
 
+  const searchQuery = (string) => {
+    setSearchQuery(string);
+  };
+
   return (
     <PlanetContext.Provider
-      value={ { planetsList, isLoading, fetchPlanets } }
+      value={ { planetsList, isLoading, query, searchQuery, fetchPlanets } }
     >
       { children }
     </PlanetContext.Provider>

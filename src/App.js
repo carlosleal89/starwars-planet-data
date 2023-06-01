@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import './App.css';
 import PlanetContext from './context/PlanetsContext';
 import Table from './components/Table';
+import Header from './components/Header';
 
 function App() {
   const { fetchPlanets } = useContext(PlanetContext);
@@ -13,6 +14,7 @@ function App() {
 
   return (
     <div>
+      <Header />
       <Table />
     </div>
   );
