@@ -3,9 +3,9 @@ import PlanetContext from '../context/PlanetsContext';
 import './Table.css';
 
 export default function Table() {
-  const { planetsList, isLoading, query } = useContext(PlanetContext);
+  const { planetsList, isLoading, query, filterQuery } = useContext(PlanetContext);
   const [keys, setKeys] = useState([]);
-  console.log(keys);
+  const op = '>=';
 
   useEffect(() => {
     if (planetsList.length > 0) {
@@ -29,6 +29,7 @@ export default function Table() {
             </thead>
             {
               planetsList
+                .filter((el) => el[filterQuery] >= 4500000000	)
                 .filter(({ name }) => {
                   const value = name.toLowerCase();
                   return value.includes(query);
