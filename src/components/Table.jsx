@@ -5,7 +5,7 @@ import './Table.css';
 export default function Table() {
   const { planetsList, isLoading, query } = useContext(PlanetContext);
   const [keys, setKeys] = useState([]);
-  console.log(query);
+  console.log(keys);
 
   useEffect(() => {
     if (planetsList.length > 0) {
