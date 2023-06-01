@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PlanetContext from '../context/PlanetsContext';
+import './Table.css';
 
 export default function Table() {
   const { planetsList, isLoading } = useContext(PlanetContext);
@@ -16,8 +17,8 @@ export default function Table() {
       {isLoading ? (
         <h2>Carregando...</h2>
       ) : (
-        <div>
-          <table>
+        <div className="table-div">
+          <table className="table">
             <thead>
               <tr>
                 {keys.map((key) => (
