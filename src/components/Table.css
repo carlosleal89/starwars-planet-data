@@ -4,5 +4,14 @@
 }
 
 td {
+  text-align: center;
   word-wrap: break-word;
 }
+
+th {
+  background-color: black;
+  color: yellow;
+  text-align: center;
+  word-wrap: break-word;
+}
+

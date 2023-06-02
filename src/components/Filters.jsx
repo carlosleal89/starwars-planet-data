@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import PlanetContext from '../context/PlanetsContext';
+import './Filters.css';
 
 export default function Filters() {
   const {
@@ -43,55 +44,60 @@ export default function Filters() {
   return (
     <div className="filters-div">
       <div>
-        <select
-          data-testid="column-filter"
-          value={ filterState.column }
-          onChange={ ({ target }) => setFilterState({
-            ...filterState, column: target.value }) }
-        >
-          {
-            columnFilters
-              .filter(checkColumns)
-              .map((filter) => (
-                <option key={ filter } value={ filter }>{filter}</option>
-              ))
-          }
-        </select>
-      </div>
-      <div>
-        <select
-          data-testid="comparison-filter"
-          value={ filterState.comparison }
-          onChange={ ({ target }) => setFilterState({
-            ...filterState, comparison: target.value }) }
-        >
-          <option value="maior que">maior que</option>
-          <option value="menor que">menor que</option>
-          <option value="igual a">igual a</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="value-filter">
-          <input
-            type="number"
-            data-testid="value-filter"
-            value={ filterState.value }
+        <div>
+          <select
+            data-testid="column-filter"
+            className="input-elements"
+            value={ filterState.column }
             onChange={ ({ target }) => setFilterState({
-              ...filterState, value: target.value }) }
-            id="value-filter"
-          />
-        </label>
+              ...filterState, column: target.value }) }
+          >
+            {
+              columnFilters
+                .filter(checkColumns)
+                .map((filter) => (
+                  <option key={ filter } value={ filter }>{filter}</option>
+                ))
+            }
+          </select>
+        </div>
+        <div>
+          <select
+            data-testid="comparison-filter"
+            className="input-elements"
+            value={ filterState.comparison }
+            onChange={ ({ target }) => setFilterState({
+              ...filterState, comparison: target.value }) }
+          >
+            <option value="maior que">maior que</option>
+            <option value="menor que">menor que</option>
+            <option value="igual a">igual a</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="value-filter">
+            <input
+              className="input-elements"
+              type="number"
+              data-testid="value-filter"
+              value={ filterState.value }
+              onChange={ ({ target }) => setFilterState({
+                ...filterState, value: target.value }) }
+              id="value-filter"
+            />
+          </label>
+        </div>
+        <button
+          data-testid="button-filter"
+          disabled={ columnFilters.length === 0 }
+          onClick={ () => {
+            setActiveFilters([...activeFilters, filterState]);
+            getColumnValue(filterState.column);
+          } }
+        >
+          Filtrar
+        </button>
       </div>
-      <button
-        data-testid="button-filter"
-        disabled={ columnFilters.length === 0 }
-        onClick={ () => {
-          setActiveFilters([...activeFilters, filterState]);
-          getColumnValue(filterState.column);
-        } }
-      >
-        Filtrar
-      </button>
       <div>
         {
           activeFilters.map((filter, index) => (
@@ -108,21 +114,23 @@ export default function Filters() {
           ))
         }
       </div>
-      <button
-        data-testid="button-remove-filters"
-        onClick={ () => {
-          setActiveFilters([]);
-          setColumnFilters([
-            'population',
-            'orbital_period',
-            'diameter',
-            'rotation_period',
-            'surface_water',
-          ]);
-        } }
-      >
-        Remover todas as filtragens
-      </button>
+      <div>
+        <button
+          data-testid="button-remove-filters"
+          onClick={ () => {
+            setActiveFilters([]);
+            setColumnFilters([
+              'population',
+              'orbital_period',
+              'diameter',
+              'rotation_period',
+              'surface_water',
+            ]);
+          } }
+        >
+          Remover todas as filtragens
+        </button>
+      </div>
     </div>
   );
 }

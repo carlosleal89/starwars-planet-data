@@ -1,0 +1,17 @@
+.filters-div {
+  align-items: center;
+  display: flex;
+  height: 300px;
+  justify-content: space-between;
+}
+
+.input-elements {
+  background-color: black;
+  color: yellow;
+  width: 150px;
+}
+
+button {
+  background-color: rgb(44, 42, 42);
+  color: yellow;
+}
