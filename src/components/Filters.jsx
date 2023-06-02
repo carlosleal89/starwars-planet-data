@@ -31,6 +31,15 @@ export default function Filters() {
     setColumnFilters(newColumnFilters);
   };
 
+  const removeFilter = (index, column) => {
+    const newActiveFilters = [...activeFilters];
+    newActiveFilters.splice(index, 1);
+    console.log(newActiveFilters);
+    console.log(column);
+    setActiveFilters(newActiveFilters);
+    setColumnFilters([...columnFilters, column]);
+  };
+
   return (
     <div className="filters-div">
       <div>
@@ -85,13 +94,35 @@ export default function Filters() {
       </button>
       <div>
         {
-          activeFilters.map(({ column, comparison, value }) => (
-            <div key={ column }>
-              <p>{`${column} ${comparison} ${value}`}</p>
+          activeFilters.map((filter, index) => (
+            <div data-testid="filter" key={ index }>
+              <p>
+                {`${filter.column} ${filter.comparison} ${filter.value}`}
+              </p>
+              <button
+                onClick={ () => removeFilter(index, filter.column) }
+              >
+                Apagar
+              </button>
             </div>
           ))
         }
       </div>
+      <button
+        data-testid="button-remove-filters"
+        onClick={ () => {
+          setActiveFilters([]);
+          setColumnFilters([
+            'population',
+            'orbital_period',
+            'diameter',
+            'rotation_period',
+            'surface_water',
+          ]);
+        } }
+      >
+        Remover todas as filtragens
+      </button>
     </div>
   );
 }
