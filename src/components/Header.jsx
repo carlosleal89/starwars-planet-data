@@ -5,14 +5,14 @@ import './Header.css';
 
 export default function Header() {
   const [nameSearch, setNameSearch] = useState('');
-  const { searchQuery } = useContext(PlanetContext);
+  const { setSearchQuery } = useContext(PlanetContext);
 
   const handleChange = ({ value }) => {
     setNameSearch(value);
   };
 
   useEffect(() => {
-    searchQuery(nameSearch);
+    setSearchQuery(nameSearch);
   }, [nameSearch]);
 
   return (

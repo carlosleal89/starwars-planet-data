@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PlanetContext from './PlanetsContext';
 
 export default function PlanetsProvider({ children }) {
@@ -7,7 +7,7 @@ export default function PlanetsProvider({ children }) {
   const [filteredPlanetList, setFilteredPlanetList] = useState(planetsList);
   const [isLoading, setIsLoading] = useState(false);
   const [query, setSearchQuery] = useState('');
-  const [filterQuery, setFilterQuery] = useState('');
+  const [activeFilters, setActiveFilters] = useState([]);
 
   const fetchPlanets = async (url) => {
     try {
@@ -19,7 +19,6 @@ export default function PlanetsProvider({ children }) {
         const { residents, ...infos } = result;
         return infos;
       });
-      // console.log(planetData);
       setPlanetsList(planetData);
     } catch (error) {
       console.log(error.message);
@@ -28,13 +27,9 @@ export default function PlanetsProvider({ children }) {
     }
   };
 
-  const searchQuery = (string) => {
-    setSearchQuery(string);
-  };
-
-  const filterSelection = (filter) => {
-    setFilterQuery(filter);
-  };
+  useEffect(() => {
+    setFilteredPlanetList(planetsList);
+  }, [planetsList]);
 
   return (
     <PlanetContext.Provider
@@ -43,11 +38,11 @@ export default function PlanetsProvider({ children }) {
           planetsList,
           isLoading,
           query,
-          filterQuery,
           filteredPlanetList,
+          activeFilters,
+          setActiveFilters,
           setFilteredPlanetList,
-          filterSelection,
-          searchQuery,
+          setSearchQuery,
           fetchPlanets }
       }
     >

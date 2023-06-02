@@ -3,7 +3,12 @@ import PlanetContext from '../context/PlanetsContext';
 import './Table.css';
 
 export default function Table() {
-  const { filteredPlanetList, isLoading, query } = useContext(PlanetContext);
+  const {
+    filteredPlanetList,
+    isLoading,
+    query,
+    activeFilters,
+  } = useContext(PlanetContext);
   const [keys, setKeys] = useState([]);
 
   useEffect(() => {
@@ -11,6 +16,29 @@ export default function Table() {
       setKeys(Object.keys(filteredPlanetList[0]));
     }
   }, [filteredPlanetList]);
+
+  const applyFilters = (planet) => {
+    const filterConditions = [];
+    activeFilters.forEach((filter) => {
+      switch (filter.comparison) {
+      case 'maior que':
+        return (
+          filterConditions.push(planet[filter.column]
+            > Number(filter.value)));
+      case 'menor que':
+        return (
+          filterConditions.push(planet[filter.column]
+            < Number(filter.value)));
+      case 'igual a':
+        return (
+          filterConditions.push(Number(planet[filter.column])
+            === Number(filter.value)));
+      default:
+        return true;
+      }
+    });
+    return filterConditions.every((el) => el);
+  };
 
   return (
     <div>
@@ -33,6 +61,7 @@ export default function Table() {
                     const value = name.toLowerCase();
                     return value.includes(query);
                   })
+                  .filter(applyFilters)
                   .map((planet, index) => (
                     <tr key={ index }>
                       <td>{planet.name}</td>
