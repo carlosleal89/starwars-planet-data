@@ -8,6 +8,12 @@ export default function PlanetsProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [query, setSearchQuery] = useState('');
   const [activeFilters, setActiveFilters] = useState([]);
+  const [orderFilters, setOrderFilters] = useState({
+    order: {
+      column: 'population',
+      sort: '',
+    },
+  });
 
   const fetchPlanets = async (url) => {
     try {
@@ -40,6 +46,8 @@ export default function PlanetsProvider({ children }) {
           query,
           filteredPlanetList,
           activeFilters,
+          orderFilters,
+          setOrderFilters,
           setActiveFilters,
           setFilteredPlanetList,
           setSearchQuery,

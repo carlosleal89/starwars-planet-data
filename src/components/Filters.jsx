@@ -3,24 +3,36 @@ import PlanetContext from '../context/PlanetsContext';
 import './Filters.css';
 
 export default function Filters() {
-  const {
-    setActiveFilters,
-    activeFilters,
-  } = useContext(PlanetContext);
-  const [filterState, setFilterState] = useState({
-    column: 'population',
-    comparison: 'maior que',
-    value: 0,
-  });
-  const [columnFilters, setColumnFilters] = useState([
+  const columnValues = [
     'population',
     'orbital_period',
     'diameter',
     'rotation_period',
     'surface_water',
-  ]);
+  ];
 
-  const checkColumns = (option) => !activeFilters.find(({ column }) => column === option);
+  const {
+    setActiveFilters,
+    activeFilters,
+    setOrderFilters,
+  } = useContext(PlanetContext);
+
+  const [filterState, setFilterState] = useState({
+    column: 'population',
+    comparison: 'maior que',
+    value: 0,
+  });
+
+  const [columnFilters, setColumnFilters] = useState(columnValues);
+
+  const [orderFilter, setOrderFilter] = useState({
+    order: {
+      column: 'population',
+      sort: 'ASC',
+    },
+  });
+
+  // const checkColumns = (option) => !activeFilters.find(({ column }) => column === option);
 
   const getColumnValue = (column) => {
     const newColumnFilters = columnFilters.filter((el) => el !== column);
@@ -35,8 +47,6 @@ export default function Filters() {
   const removeFilter = (index, column) => {
     const newActiveFilters = [...activeFilters];
     newActiveFilters.splice(index, 1);
-    console.log(newActiveFilters);
-    console.log(column);
     setActiveFilters(newActiveFilters);
     setColumnFilters([...columnFilters, column]);
   };
@@ -54,7 +64,7 @@ export default function Filters() {
           >
             {
               columnFilters
-                .filter(checkColumns)
+                // .filter(checkColumns)
                 .map((filter) => (
                   <option key={ filter } value={ filter }>{filter}</option>
                 ))
@@ -115,17 +125,79 @@ export default function Filters() {
         }
       </div>
       <div>
+        <select
+          data-testid="column-sort"
+          value={ orderFilter.order.column }
+          onChange={ ({ target }) => setOrderFilter({
+            order: {
+              ...orderFilter.order,
+              column: target.value,
+            },
+          }) }
+        >
+          {
+            columnValues
+              .map((filter) => (
+                <option key={ filter } value={ filter }>{filter}</option>
+              ))
+          }
+        </select>
+        <div>
+          <label htmlFor="asc-radio">
+            Ascendente
+            <input
+              type="radio"
+              data-testid="column-sort-input-asc"
+              id="asc-radio"
+              value="ASC"
+              checked={ orderFilter.order.sort === 'ASC' }
+              onChange={ ({ target }) => setOrderFilter({
+                order: {
+                  ...orderFilter.order,
+                  sort: target.value,
+                },
+              }) }
+            />
+          </label>
+          <label htmlFor="desc-radio">
+            Descendente
+            <input
+              type="radio"
+              data-testid="column-sort-input-desc"
+              id="desc-radio"
+              value="DESC"
+              checked={ orderFilter.order.sort === 'DESC' }
+              onChange={ ({ target }) => setOrderFilter({
+                order: {
+                  ...orderFilter.order,
+                  sort: target.value,
+                },
+              }) }
+            />
+          </label>
+        </div>
+        <div>
+          <button
+            data-testid="column-sort-button"
+            onClick={ () => setOrderFilters(orderFilter) }
+          >
+            Ordenar
+          </button>
+
+        </div>
+      </div>
+      <div>
         <button
           data-testid="button-remove-filters"
           onClick={ () => {
             setActiveFilters([]);
-            setColumnFilters([
-              'population',
-              'orbital_period',
-              'diameter',
-              'rotation_period',
-              'surface_water',
-            ]);
+            setColumnFilters(columnValues);
+            setOrderFilters({
+              order: {
+                column: 'population',
+                sort: '',
+              },
+            });
           } }
         >
           Remover todas as filtragens

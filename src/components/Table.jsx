@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PlanetContext from '../context/PlanetsContext';
 import './Table.css';
+import Loading from './Loading';
 
 export default function Table() {
   const {
@@ -8,6 +9,7 @@ export default function Table() {
     isLoading,
     query,
     activeFilters,
+    orderFilters,
   } = useContext(PlanetContext);
   const [keys, setKeys] = useState([]);
 
@@ -15,7 +17,7 @@ export default function Table() {
     if (filteredPlanetList.length > 0) {
       setKeys(Object.keys(filteredPlanetList[0]));
     }
-  }, [filteredPlanetList]);
+  }, [filteredPlanetList, orderFilters]);
 
   const applyFilters = (planet) => {
     const filterConditions = [];
@@ -40,10 +42,31 @@ export default function Table() {
     return filterConditions.every((el) => el);
   };
 
+  const sortFilter = () => {
+    const sortedArray = filteredPlanetList;
+    const unknownCheck = -1;
+    switch (orderFilters.order.sort) {
+    case '':
+      return filteredPlanetList;
+    case 'ASC':
+      return (
+        sortedArray
+          .sort((a, b) => (b[orderFilters.order.column] === 'unknown'
+            ? unknownCheck : a[orderFilters.order.column] - b[orderFilters.order.column]))
+      );
+    case 'DESC':
+      return (
+        sortedArray.sort((a, b) => (b[orderFilters.order.column] === 'unknown'
+          ? unknownCheck : b[orderFilters.order.column] - a[orderFilters.order.column]))
+      );
+    default: return true;
+    }
+  };
+
   return (
     <div>
       {isLoading ? (
-        <h2>Carregando...</h2>
+        <Loading />
       ) : (
         <div className="table-div">
           <table className="table">
@@ -62,9 +85,10 @@ export default function Table() {
                     return value.includes(query);
                   })
                   .filter(applyFilters)
+                  .filter(sortFilter)
                   .map((planet, index) => (
                     <tr key={ index }>
-                      <td>{planet.name}</td>
+                      <td data-testid="planet-name">{planet.name}</td>
                       <td>{planet.rotation_period}</td>
                       <td>{planet.orbital_period}</td>
                       <td>{planet.diameter}</td>
