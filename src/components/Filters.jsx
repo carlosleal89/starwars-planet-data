@@ -11,15 +11,25 @@ export default function Filters() {
     comparison: 'maior que',
     value: 0,
   });
-  const columnFilters = [
+  const [columnFilters, setColumnFilters] = useState([
     'population',
     'orbital_period',
     'diameter',
     'rotation_period',
     'surface_water',
-  ];
+  ]);
 
   const checkColumns = (option) => !activeFilters.find(({ column }) => column === option);
+
+  const getColumnValue = (column) => {
+    const newColumnFilters = columnFilters.filter((el) => el !== column);
+    setFilterState({
+      column: newColumnFilters[0],
+      comparison: 'maior que',
+      value: 0,
+    });
+    setColumnFilters(newColumnFilters);
+  };
 
   return (
     <div className="filters-div">
@@ -65,21 +75,18 @@ export default function Filters() {
       </div>
       <button
         data-testid="button-filter"
+        disabled={ columnFilters.length === 0 }
         onClick={ () => {
           setActiveFilters([...activeFilters, filterState]);
-          setFilterState({
-            column: 'population',
-            comparison: 'maior que',
-            value: 0,
-          });
+          getColumnValue(filterState.column);
         } }
       >
         Filtrar
       </button>
       <div>
         {
-          activeFilters.map(({ column, comparison, value }, index) => (
-            <div key={ index }>
+          activeFilters.map(({ column, comparison, value }) => (
+            <div key={ column }>
               <p>{`${column} ${comparison} ${value}`}</p>
             </div>
           ))
