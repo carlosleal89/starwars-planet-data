@@ -39,6 +39,31 @@ describe('Testes do componente Table', () => {
     });
 
     test('Testa o filtro numerico', () => {
+        const valueFilter = screen.getByTestId('value-filter');
+        const filterBtn = screen.getByRole('button', {name: /filtrar/i});
+        const comparisonEl = screen.getByTestId('comparison-filter');
 
+        userEvent.type(valueFilter, '4500000000');
+        userEvent.click(filterBtn);
+
+        const coruscant = screen.getByRole('cell', {name: /coruscant/i});
+        expect(coruscant).toBeInTheDocument();
+
+        userEvent.selectOptions(comparisonEl, 'menor que');
+        userEvent.type(valueFilter, '6000000');
+        userEvent.click(filterBtn);
+
+        userEvent.selectOptions(comparisonEl, 'igual a');
+        userEvent.type(valueFilter, '6000000');
+        userEvent.click(filterBtn);
+
+        const columnSort = screen.getByTestId('column-sort');
+        const descFilter = screen.getByText(/descendente/i);
+        const orderBtn = screen.getByRole('button', {name: /ordenar/i});
+        act(() => {
+        userEvent.selectOptions(columnSort, 'diameter');
+        userEvent.click(descFilter);
+        userEvent.click(orderBtn);
+    });
     })
 })
