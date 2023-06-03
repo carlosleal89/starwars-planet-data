@@ -12,6 +12,7 @@ export default function Loading() {
           @samvgm
         </a>
       </p> */}
+      <h2>Carregando</h2>
       <div id="loader">
         <div className="ls-particles ls-part-1" />
         <div className="ls-particles ls-part-2" />
@@ -24,3 +25,5 @@ export default function Loading() {
     </div>
   );
 }
+
+// creditos ao elemento de loading ao https://codepen.io/samvgm
