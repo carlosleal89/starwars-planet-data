@@ -3,7 +3,7 @@ import { render, screen, waitFor, act, waitForElementToBeRemoved } from '@testin
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 import PlanetsProvider from '../context/PlanetsProvider';
-import mockData from '../mocks/data';
+import mockData from '../mocks/mockData';
 
 describe('Testes do componente Table', () => {
     beforeEach(() => {
@@ -37,4 +37,8 @@ describe('Testes do componente Table', () => {
         const dagobah = screen.getByRole('cell', {  name: /hoth/i})
         expect(dagobah).toBeInTheDocument();
     });
+
+    test('Testa o filtro numerico', () => {
+
+    })
 })
