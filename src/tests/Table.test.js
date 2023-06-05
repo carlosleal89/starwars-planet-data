@@ -56,14 +56,17 @@ describe('Testes do componente Table', () => {
         userEvent.selectOptions(comparisonEl, 'igual a');
         userEvent.type(valueFilter, '6000000');
         userEvent.click(filterBtn);
+    });
 
+    test('Testa o filtro por ordenação', () => {
         const columnSort = screen.getByTestId('column-sort');
         const descFilter = screen.getByText(/descendente/i);
         const orderBtn = screen.getByRole('button', {name: /ordenar/i});
-        act(() => {
+
+        userEvent.click(orderBtn);
+
         userEvent.selectOptions(columnSort, 'diameter');
         userEvent.click(descFilter);
         userEvent.click(orderBtn);
-    });
     })
 })
