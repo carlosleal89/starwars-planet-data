@@ -14,6 +14,8 @@ function App() {
 
   return (
     <div>
+      <div className="stars" />
+      <div className="twinkling" />
       <Header />
       <Table />
     </div>
