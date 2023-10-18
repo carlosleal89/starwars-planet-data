@@ -1,6 +1,6 @@
 # StarWars Planet Data
 
-<a href='https://starwars-data-search.vercel.app/'>https://starwars-data-search.vercel.app/</a>
+<a href='https://starwars-planet-data.vercel.app/'>https://starwars-planet-data.vercel.app/</a>
 
 Bem-vindo ao StarWars Planet Data. Obtenha informações dos planetas de Star Wars. May the force be with you.
 
