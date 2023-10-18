@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import './App.css';
+import './styles/App.css';
 import PlanetContext from './context/PlanetsContext';
 import Table from './components/Table';
 import Header from './components/Header';
