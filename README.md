@@ -1,4 +1,4 @@
-# StarWars Planet Data: Tudo sobre os planetas do universo de Star Wars
+# StarWars Planet Data
 
 <a href='https://starwars-data-search.vercel.app/'>https://starwars-data-search.vercel.app/</a>
 
