@@ -1,19 +1,28 @@
-.input-div {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid red;
+.header-div {
 }
 
-h1 {
+.input-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h3 {
   color: yellow;
+  margin: 0 0 1rem;
+
 }
 
 #nameInput {
-  color: #fff;
   background-color: #111;
+  color: yellow;
+  width: 100%;
+  border-radius: 10px;
+  height: 2rem;
+  margin-top: 5px;
 }
 
 #swlogo {
   width: 10rem;
+  margin-top: 1rem;
 }

@@ -1,18 +1,60 @@
 .filters-div {
-  align-items: center;
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   height: 300px;
-  justify-content: space-between;
   border: 1px solid red;
+  padding: 5px;
 }
 
 .input-elements {
   background-color: #111;
   color: yellow;
-  width: 150px;
+  width: 6rem;
+  border-radius: 10px;
+  height: 2rem;
+  margin-top: 5px;
+}
+
+#order-filter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 button {
   background-color: rgb(44, 42, 42);
   color: yellow;
+  min-width: 6rem;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+#value-filter {
+  width: 5.5rem;
+  height: 1.5rem;
+}
+
+#asc-radio, #desc-radio {
+  display: none;
+}
+
+#order-filter-container label {
+  border: 1px solid #111;
+  color: yellow;
+  background-color: rgb(44, 42, 42);
+  margin: 5px 0.5rem;
+}
+
+#filter-btn {
+  justify-self: center
+}
+
+#order-btn {}
+
+#remove-btn {
+  position: fixed;
+  height: 1.8rem;
+  width: 100%;
+  bottom: 0;
 }

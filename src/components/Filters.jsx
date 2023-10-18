@@ -56,7 +56,6 @@ export default function Filters() {
       <div>
         <div>
           <select
-            data-testid="column-filter"
             className="input-elements"
             value={ filterState.column }
             onChange={ ({ target }) => setFilterState({
@@ -64,7 +63,6 @@ export default function Filters() {
           >
             {
               columnFilters
-                // .filter(checkColumns)
                 .map((filter) => (
                   <option key={ filter } value={ filter }>{filter}</option>
                 ))
@@ -73,7 +71,6 @@ export default function Filters() {
         </div>
         <div>
           <select
-            data-testid="comparison-filter"
             className="input-elements"
             value={ filterState.comparison }
             onChange={ ({ target }) => setFilterState({
@@ -89,7 +86,6 @@ export default function Filters() {
             <input
               className="input-elements"
               type="number"
-              data-testid="value-filter"
               value={ filterState.value }
               onChange={ ({ target }) => setFilterState({
                 ...filterState, value: target.value }) }
@@ -98,7 +94,7 @@ export default function Filters() {
           </label>
         </div>
         <button
-          data-testid="button-filter"
+          id="filter-btn"
           disabled={ columnFilters.length === 0 }
           onClick={ () => {
             setActiveFilters([...activeFilters, filterState]);
@@ -108,7 +104,7 @@ export default function Filters() {
           Filtrar
         </button>
       </div>
-      <div>
+      <div id="active-filters-container">
         {
           activeFilters.map((filter, index) => (
             <div data-testid="filter" key={ index }>
@@ -124,9 +120,9 @@ export default function Filters() {
           ))
         }
       </div>
-      <div>
+      <div id="order-filter-container">
         <select
-          data-testid="column-sort"
+          className="input-elements"
           value={ orderFilter.order.column }
           onChange={ ({ target }) => setOrderFilter({
             order: {
@@ -142,67 +138,61 @@ export default function Filters() {
               ))
           }
         </select>
-        <div>
-          <label htmlFor="asc-radio">
-            Ascendente
-            <input
-              type="radio"
-              data-testid="column-sort-input-asc"
-              id="asc-radio"
-              value="ASC"
-              checked={ orderFilter.order.sort === 'ASC' }
-              onChange={ ({ target }) => setOrderFilter({
-                order: {
-                  ...orderFilter.order,
-                  sort: target.value,
-                },
-              }) }
-            />
-          </label>
-          <label htmlFor="desc-radio">
-            Descendente
-            <input
-              type="radio"
-              data-testid="column-sort-input-desc"
-              id="desc-radio"
-              value="DESC"
-              checked={ orderFilter.order.sort === 'DESC' }
-              onChange={ ({ target }) => setOrderFilter({
-                order: {
-                  ...orderFilter.order,
-                  sort: target.value,
-                },
-              }) }
-            />
-          </label>
-        </div>
+        <label htmlFor="asc-radio">
+          Ascendente
+          <input
+            type="radio"
+            id="asc-radio"
+            value="ASC"
+            checked={ orderFilter.order.sort === 'ASC' }
+            onChange={ ({ target }) => setOrderFilter({
+              order: {
+                ...orderFilter.order,
+                sort: target.value,
+              },
+            }) }
+          />
+        </label>
+        <label htmlFor="desc-radio">
+          Descendente
+          <input
+            type="radio"
+            id="desc-radio"
+            value="DESC"
+            checked={ orderFilter.order.sort === 'DESC' }
+            onChange={ ({ target }) => setOrderFilter({
+              order: {
+                ...orderFilter.order,
+                sort: target.value,
+              },
+            }) }
+          />
+        </label>
         <div>
           <button
-            data-testid="column-sort-button"
             onClick={ () => setOrderFilters(orderFilter) }
+            id="order-btn"
           >
             Ordenar
           </button>
 
         </div>
       </div>
-      <div>
-        <button
-          data-testid="button-remove-filters"
-          onClick={ () => {
-            setActiveFilters([]);
-            setColumnFilters(columnValues);
-            setOrderFilters({
-              order: {
-                column: 'population',
-                sort: '',
-              },
-            });
-          } }
-        >
-          Remover todas as filtragens
-        </button>
-      </div>
+      <button
+        id="remove-btn"
+        onClick={ () => {
+          setActiveFilters([]);
+          setColumnFilters(columnValues);
+          setOrderFilters({
+            order: {
+              column: 'population',
+              sort: '',
+            },
+          });
+        } }
+      >
+        Remover filtros
+      </button>
     </div>
   );
 }
