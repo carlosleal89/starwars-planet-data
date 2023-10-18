@@ -125,6 +125,7 @@ export default function Filters() {
           </select>
           <select
             className="input-elements"
+            defaultValue="ASC"
             onChange={ ({ target }) => setOrderFilter({
               order: {
                 ...orderFilter.order,
@@ -132,7 +133,7 @@ export default function Filters() {
               },
             }) }
           >
-            <option value="ASC" selected>ASC</option>
+            <option value="ASC">ASC</option>
             <option value="DESC">DESC</option>
           </select>
           <div>
