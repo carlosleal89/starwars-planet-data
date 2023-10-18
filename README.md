@@ -1,4 +1,4 @@
-# GetRhythm: Sua Plataforma de Música Personalizada
+# StarWars Planet Data: Tudo sobre os planetas do universo de Star Wars
 
 <a href='https://starwars-data-search.vercel.app/'>https://starwars-data-search.vercel.app/</a>
 
