@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PlanetContext from '../context/PlanetsContext';
-import './Table.css';
+import '../styles/Table.css';
 import Loading from './Loading';
 
 export default function Table() {

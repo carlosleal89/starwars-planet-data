@@ -5,10 +5,6 @@
 /.pnp
 .pnp.js
 
-# testing
-/coverage
-/cypress/reports
-
 # production
 /build
 
