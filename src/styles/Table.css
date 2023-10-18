@@ -1,6 +1,13 @@
+.table-div {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
 .table {
   table-layout: fixed;
-  width: 100%;
+  width: 350%;
+  border: 1px solid red;
+  background-color: #111;
 }
 
 td {
@@ -9,7 +16,7 @@ td {
 }
 
 th {
-  background-color: black;
+  background-color: #1d1d1d;
   color: yellow;
   text-align: center;
   word-wrap: break-word;

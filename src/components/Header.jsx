@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import PlanetContext from '../context/PlanetsContext';
 import Filters from './Filters';
 import '../styles/Header.css';
+import swLogo from '../data/star-wars.svg';
 
 export default function Header() {
   const [nameSearch, setNameSearch] = useState('');
@@ -18,7 +19,8 @@ export default function Header() {
   return (
     <div className="header-div">
       <div className="input-div">
-        <h1>Star Wars</h1>
+        {/* <h1>Star Wars</h1> */}
+        <img src={ swLogo } id="swlogo" alt="star wars logo" />
         <h3>Planets List</h3>
         <label htmlFor="nameInput">
           <input

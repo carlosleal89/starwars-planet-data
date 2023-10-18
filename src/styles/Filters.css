@@ -3,10 +3,11 @@
   display: flex;
   height: 300px;
   justify-content: space-between;
+  border: 1px solid red;
 }
 
 .input-elements {
-  background-color: black;
+  background-color: #111;
   color: yellow;
   width: 150px;
 }
