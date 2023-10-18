@@ -53,7 +53,7 @@ export default function Filters() {
 
   return (
     <div className="filters-div">
-      <div>
+      <div id="number-filter-container">
         <div>
           <select
             className="input-elements"
@@ -138,36 +138,18 @@ export default function Filters() {
               ))
           }
         </select>
-        <label htmlFor="asc-radio">
-          Ascendente
-          <input
-            type="radio"
-            id="asc-radio"
-            value="ASC"
-            checked={ orderFilter.order.sort === 'ASC' }
-            onChange={ ({ target }) => setOrderFilter({
-              order: {
-                ...orderFilter.order,
-                sort: target.value,
-              },
-            }) }
-          />
-        </label>
-        <label htmlFor="desc-radio">
-          Descendente
-          <input
-            type="radio"
-            id="desc-radio"
-            value="DESC"
-            checked={ orderFilter.order.sort === 'DESC' }
-            onChange={ ({ target }) => setOrderFilter({
-              order: {
-                ...orderFilter.order,
-                sort: target.value,
-              },
-            }) }
-          />
-        </label>
+        <select
+          className="input-elements"
+          onChange={ ({ target }) => setOrderFilter({
+            order: {
+              ...orderFilter.order,
+              sort: target.value,
+            },
+          }) }
+        >
+          <option value="ASC" selected>ASC</option>
+          <option value="DESC">DESC</option>
+        </select>
         <div>
           <button
             onClick={ () => setOrderFilters(orderFilter) }
