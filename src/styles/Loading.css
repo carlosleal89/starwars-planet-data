@@ -1,6 +1,6 @@
 /* creditos ao elemento de loading ao https://codepen.io/samvgm */
 .loading-div {
-  background-color: rgb(44, 42, 42);
+  background-color: transparent;
   min-height: 380px;
   position: relative;
 }
@@ -100,7 +100,6 @@ p a:hover {
   transform: rotateZ(0deg);
   width: 1px;
 }
-
 
 .lightsaber.ls-green:before {
   animation: showlightgreen 2s ease-in-out infinite 1s;
@@ -409,7 +408,7 @@ p a:hover {
   }
 }
 
-@keyframes showlightgreen {
+/* @keyframes showlightgreen {
 
   0% {
     box-shadow: 0 0 0 0 #87c054;
@@ -465,9 +464,9 @@ p a:hover {
     box-shadow: 0 0 0 0 #f06363;
     max-height: 0;
   }
-}
+} */
 
-@keyframes fightleft {
+/* @keyframes fightleft {
 
   0% {
     bottom: 0;
@@ -686,4 +685,4 @@ p a:hover {
     background-color: rgba(51, 51, 51, 0);
     transform: rotateZ(65deg) translateY(-35px);
   }
-}
+} */
