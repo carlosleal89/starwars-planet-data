@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import PlanetContext from '../context/PlanetsContext';
-import './Filters.css';
+import '../styles/Filters.css';
 
 export default function Filters() {
   const columnValues = [

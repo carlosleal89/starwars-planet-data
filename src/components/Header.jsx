@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PlanetContext from '../context/PlanetsContext';
 import Filters from './Filters';
-import './Header.css';
+import '../styles/Header.css';
 
 export default function Header() {
   const [nameSearch, setNameSearch] = useState('');

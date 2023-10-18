@@ -13,9 +13,24 @@ export default function Table() {
   } = useContext(PlanetContext);
   const [keys, setKeys] = useState([]);
 
+  const filterTabHeader = (planetList) => {
+    const listKeys = Object.keys(planetList);
+    const headers = [];
+    listKeys.forEach((headerEl) => {
+      if (headerEl !== 'url'
+      && headerEl !== 'edited'
+      && headerEl !== 'created'
+      && headerEl !== 'films') {
+        headers.push(headerEl);
+      }
+    });
+    return headers;
+  };
+
   useEffect(() => {
     if (filteredPlanetList.length > 0) {
-      setKeys(Object.keys(filteredPlanetList[0]));
+      const tabHeaders = filterTabHeader(filteredPlanetList[0]);
+      setKeys(tabHeaders);
     }
   }, [filteredPlanetList, orderFilters]);
 
@@ -97,10 +112,6 @@ export default function Table() {
                       <td>{planet.terrain}</td>
                       <td>{planet.surface_water}</td>
                       <td>{planet.population}</td>
-                      <td>{planet.films}</td>
-                      <td>{planet.created}</td>
-                      <td>{planet.edited}</td>
-                      <td>{planet.url}</td>
                     </tr>
                   ))
               }
