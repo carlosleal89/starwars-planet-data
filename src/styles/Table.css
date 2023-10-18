@@ -7,7 +7,6 @@
 .table {
   table-layout: fixed;
   width: 350%;
-  border: 1px solid red;
   background-color: #111;
 }
 

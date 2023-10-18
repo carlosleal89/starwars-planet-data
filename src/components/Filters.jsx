@@ -53,61 +53,103 @@ export default function Filters() {
 
   return (
     <div className="filters-div">
-      <div id="number-filter-container">
-        <div>
+      <div className="filter-selectors-container">
+        <div id="number-filter-container">
+          <div>
+            <select
+              className="input-elements"
+              value={ filterState.column }
+              onChange={ ({ target }) => setFilterState({
+                ...filterState, column: target.value }) }
+            >
+              {
+                columnFilters
+                  .map((filter) => (
+                    <option key={ filter } value={ filter }>{filter}</option>
+                  ))
+              }
+            </select>
+          </div>
+          <div>
+            <select
+              className="input-elements"
+              value={ filterState.comparison }
+              onChange={ ({ target }) => setFilterState({
+                ...filterState, comparison: target.value }) }
+            >
+              <option value="maior que">maior que</option>
+              <option value="menor que">menor que</option>
+              <option value="igual a">igual a</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="value-filter">
+              <input
+                className="input-elements"
+                type="number"
+                value={ filterState.value }
+                onChange={ ({ target }) => setFilterState({
+                  ...filterState, value: target.value }) }
+                id="value-filter"
+              />
+            </label>
+          </div>
+          <button
+            id="filter-btn"
+            disabled={ columnFilters.length === 0 }
+            onClick={ () => {
+              setActiveFilters([...activeFilters, filterState]);
+              getColumnValue(filterState.column);
+            } }
+          >
+            Filtrar
+          </button>
+        </div>
+        <div id="order-filter-container">
           <select
             className="input-elements"
-            value={ filterState.column }
-            onChange={ ({ target }) => setFilterState({
-              ...filterState, column: target.value }) }
+            value={ orderFilter.order.column }
+            onChange={ ({ target }) => setOrderFilter({
+              order: {
+                ...orderFilter.order,
+                column: target.value,
+              },
+            }) }
           >
             {
-              columnFilters
+              columnValues
                 .map((filter) => (
                   <option key={ filter } value={ filter }>{filter}</option>
                 ))
             }
           </select>
-        </div>
-        <div>
           <select
             className="input-elements"
-            value={ filterState.comparison }
-            onChange={ ({ target }) => setFilterState({
-              ...filterState, comparison: target.value }) }
+            onChange={ ({ target }) => setOrderFilter({
+              order: {
+                ...orderFilter.order,
+                sort: target.value,
+              },
+            }) }
           >
-            <option value="maior que">maior que</option>
-            <option value="menor que">menor que</option>
-            <option value="igual a">igual a</option>
+            <option value="ASC" selected>ASC</option>
+            <option value="DESC">DESC</option>
           </select>
+          <div>
+            <button
+              onClick={ () => setOrderFilters(orderFilter) }
+              id="order-btn"
+            >
+              Ordenar
+            </button>
+
+          </div>
         </div>
-        <div>
-          <label htmlFor="value-filter">
-            <input
-              className="input-elements"
-              type="number"
-              value={ filterState.value }
-              onChange={ ({ target }) => setFilterState({
-                ...filterState, value: target.value }) }
-              id="value-filter"
-            />
-          </label>
-        </div>
-        <button
-          id="filter-btn"
-          disabled={ columnFilters.length === 0 }
-          onClick={ () => {
-            setActiveFilters([...activeFilters, filterState]);
-            getColumnValue(filterState.column);
-          } }
-        >
-          Filtrar
-        </button>
       </div>
       <div id="active-filters-container">
         {
           activeFilters.map((filter, index) => (
-            <div data-testid="filter" key={ index }>
+            <div className="active-filter" key={ index }>
               <p>
                 {`${filter.column} ${filter.comparison} ${filter.value}`}
               </p>
@@ -119,46 +161,6 @@ export default function Filters() {
             </div>
           ))
         }
-      </div>
-      <div id="order-filter-container">
-        <select
-          className="input-elements"
-          value={ orderFilter.order.column }
-          onChange={ ({ target }) => setOrderFilter({
-            order: {
-              ...orderFilter.order,
-              column: target.value,
-            },
-          }) }
-        >
-          {
-            columnValues
-              .map((filter) => (
-                <option key={ filter } value={ filter }>{filter}</option>
-              ))
-          }
-        </select>
-        <select
-          className="input-elements"
-          onChange={ ({ target }) => setOrderFilter({
-            order: {
-              ...orderFilter.order,
-              sort: target.value,
-            },
-          }) }
-        >
-          <option value="ASC" selected>ASC</option>
-          <option value="DESC">DESC</option>
-        </select>
-        <div>
-          <button
-            onClick={ () => setOrderFilters(orderFilter) }
-            id="order-btn"
-          >
-            Ordenar
-          </button>
-
-        </div>
       </div>
       <button
         id="remove-btn"
