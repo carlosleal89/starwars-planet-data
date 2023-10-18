@@ -1,0 +1,13 @@
+@media screen and (min-width: 1024px) {
+  .table-div {
+    max-width: 100%;
+    overflow-x: visible;
+    margin-bottom: 1.8rem;
+  }
+  
+  .table {
+    table-layout: fixed;
+    width: 100%;
+    background-color: #111;
+  }
+}

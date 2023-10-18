@@ -52,6 +52,7 @@ button {
   width: 98%;
   margin: 0 auto;
   bottom: 0;
+  z-index: 1;
 }
 
 #active-filters-container {
@@ -68,4 +69,14 @@ button {
   width: 35%;
   justify-content: space-between;
   min-height: 20%;
+}
+
+#active-filter-name {
+  color: #fff;
+  opacity: 40%;
+}
+
+#active-filter-value {
+  color: yellow;
+  opacity: 60%;
 }

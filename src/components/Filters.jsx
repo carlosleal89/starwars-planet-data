@@ -150,8 +150,11 @@ export default function Filters() {
         {
           activeFilters.map((filter, index) => (
             <div className="active-filter" key={ index }>
-              <p>
-                {`${filter.column} ${filter.comparison} ${filter.value}`}
+              <p id="active-filter-name">
+                {`${filter.column} ${filter.comparison}:`}
+              </p>
+              <p id="active-filter-value">
+                {`${filter.value}`}
               </p>
               <button
                 onClick={ () => removeFilter(index, filter.column) }

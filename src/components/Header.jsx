@@ -19,9 +19,8 @@ export default function Header() {
   return (
     <div className="header-div">
       <div className="input-div">
-        {/* <h1>Star Wars</h1> */}
         <img src={ swLogo } id="swlogo" alt="star wars logo" />
-        <h3>Planets List</h3>
+        <h3>Planet Data</h3>
         <label htmlFor="nameInput">
           <input
             data-testid="name-filter"
